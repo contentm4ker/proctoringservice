@@ -1,6 +1,9 @@
 import numpy as np
 import cv2
 from yolov3 import YoloV3, load_darknet_weights
+
+PERSON_CLASS = 0
+MOBILE_PHONE_CLASS = 67
     
 def draw_outputs(img, outputs, class_names):
     boxes, objectness, classes, nums = outputs
@@ -36,9 +39,9 @@ if __name__ == '__main__':
         boxes, scores, classes, nums = yolo(img)
         count = 0
         for i in range(nums[0]):
-            if int(classes[0][i] == 0):
+            if int(classes[0][i] == PERSON_CLASS):
                 count += 1
-            if int(classes[0][i] == 67):
+            if int(classes[0][i] == MOBILE_PHONE_CLASS):
                 print('mobile phone detected')
         if count == 0:
             print('no person')
