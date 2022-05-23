@@ -24,6 +24,8 @@ Linux
 
     python download_weights.py
 
+### Обнаружение телефона и человека
+
 Зайти в директорию и запустить скрипт
 
     cd objects_detection
