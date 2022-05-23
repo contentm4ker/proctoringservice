@@ -47,7 +47,7 @@ Linux
 
 ![График сигнала](data/pictures/audio_process.png)
 
-Для запуска распознавания речи необходимо выполнить команду:
+Для запуска распознавания речи нужно поменять `VIDEO_TO_ANALIZE_FILE_NAME` на `data/some_speech.mp4`. Необходимо выполнить команду:
 
     python speech_recognizer.py
 
