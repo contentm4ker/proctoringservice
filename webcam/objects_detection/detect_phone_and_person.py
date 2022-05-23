@@ -4,6 +4,14 @@ from yolov3 import YoloV3, load_darknet_weights
 
 PERSON_CLASS = 0
 MOBILE_PHONE_CLASS = 67
+
+def preprocess_image_for_yolo(image):
+    img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    img = cv2.resize(img, (320, 320))
+    img = img.astype(np.float32)
+    img = np.expand_dims(img, 0)
+    img = img / 255
+    return img
     
 def draw_outputs(img, outputs, class_names):
     boxes, objectness, classes, nums = outputs
@@ -12,16 +20,8 @@ def draw_outputs(img, outputs, class_names):
     for i in range(nums):
         x1y1 = tuple((np.array(boxes[i][0:2]) * wh).astype(np.int32))
         x2y2 = tuple((np.array(boxes[i][2:4]) * wh).astype(np.int32))
-        img = cv2.rectangle(img, x1y1, x2y2, (255, 0, 0), 2)
-        img = cv2.putText(img, '{} {:.4f}'.format(class_names[int(classes[i])], objectness[i]), x1y1, cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
-    return img
-
-def preprocess_image_for_yolo(image):
-    img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    img = cv2.resize(img, (320, 320))
-    img = img.astype(np.float32)
-    img = np.expand_dims(img, 0)
-    img = img / 255
+        img = cv2.rectangle(img, x1y1, x2y2, (205, 87, 0), 1)
+        img = cv2.putText(img, '{} {:.4f}'.format(class_names[int(classes[i])], objectness[i]), x1y1, cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (42, 82, 190), 1)
     return img
 
 if __name__ == '__main__':
